@@ -1,78 +1,51 @@
+/*Убираем отступы у всей веб-страницы*/
 * {
     margin: 0;
     padding: 0;
 }
-
+/*Ставим всю структуру в центр и выходящие за пределы предметы становятся невидимыми*/
 body {
     display: grid;
     place-items: center;
     overflow-x: hidden;
 }
-
+/*Отступ сверху в слове "Шахматы"*/
 h1 {
     margin: 10px;
 }
-
+/*Разделяем клетки по горизонтали и вертикали, определяем кол-во клеток и размер столбцов*/
 ul {
     display: grid;
     grid-template-columns: 1fr;
 }
-
+/*Группируем все клеточки*/
 .divv {
     display: flex;
 }
-
+/*Ставим фигуры в центр клеток*/
 li {
     list-style: none;
     display: grid;
     place-items: center;
     font-size: 0px;
 }
-
+/*Назначаем размер клеток*/
 .box {
     margin: .5px;
     width: 75px;
     height: 75px;
 }
-
+/*Отступ сверху в словах "Ход белых" и "Ход чёрных"*/
 #tog {
     margin: 10px 0px;
 }
-
+/*Устанавлием ширину, отступ снизу и устанавливаем один и тот же объём для всех фигур*/
 .allimg {
     width: 45px;
     position: relative;
     bottom: 5px;
 }
-
+/*Изменяем размер фигур при наведении мышки*/
 .allpawn {
     transform: scale(.7);
-}
-
-.authcont {
-    width: 100vw;
-}
-
-.author {
-    float: right;
-    margin-right: 50px;
-
-}
-
-
-@media (max-width:650px){
-
-    #tog {
-        margin-bottom: 70px;
-
-    }
-
-    .box {
-        width: 11vw;
-        height: 11vw;
-    }
-
-    .allimg {
-        width: 7vw;
-    }
 }
