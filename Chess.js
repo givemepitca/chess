@@ -48,14 +48,16 @@ coloring()
 
 
 
-//Функция не позволяющая удалять фигуры своей команды
+//Функция не позволяющая удалять фигуры своей команды и смены хода
 
 function reddish() {
+    //Выбираете фигуру
     document.querySelectorAll('.box').forEach(i1 => {
+        //Если фигура выбранна, то она будет розовой и...
         if (i1.style.backgroundColor == 'pink') {
-
+            //Выбираете 2 клетку
             document.querySelectorAll('.box').forEach(i2 => {
-
+                //Если фигура подсвечена зелёным, то её можно на её место можно встать, а другая исчезнет
                 if (i2.style.backgroundColor == 'green' && i2.innerText.length !== 0) {
 
 
@@ -72,36 +74,33 @@ function reddish() {
                     aside = eval(arr.pop())
                     aup = eval(arr.shift())
                     a = aside + aup
-            
+                    //Если фигура не встречает союзную фигуру, то она подсвечивается зелёным
                     if (a % 2 == 0 && pinkColor == greenColor) {
                         i2.style.backgroundColor = 'rgb(240, 201, 150)'
                     }
                     if (a % 2 !== 0 && pinkColor == greenColor) {
                         i2.style.backgroundColor = 'rgb(100, 75, 43)'
                     }
-
-
                 }
             })
         }
     })
 }
 
-
+// Назначение переменной
 tog = 1
-
+//Если на фигуру нажали, то выполняется функция
 document.querySelectorAll('.box').forEach(item => {
-
-
-
+    //Если кликнули, то выполняется функция
     item.addEventListener('click', function () {
 
         // Удаление срубленной фигуры
-
+    
+        //Если фигура сходила на пустую клетку, то Переменная увеличивается
         if (item.style.backgroundColor == 'green' && item.innerText.length == 0) {
             tog = tog + 1
         }
-
+        //Если выбранная фигура касается вражеской фигуры, а фигура удаляется
         else if (item.style.backgroundColor == 'green' && item.innerText.length !== 0) {
 
             document.querySelectorAll('.box').forEach(i => {
@@ -112,9 +111,9 @@ document.querySelectorAll('.box').forEach(item => {
                     document.getElementById(pinkId).innerText = ''
                     item.innerText = pinkText
                     coloring()
+                    //Картинка фигуры перемещается
                     insertImage()
                     tog = tog + 1
-                    
                 }
             })
         }
@@ -297,8 +296,6 @@ document.querySelectorAll('.box').forEach(item => {
                         break
                     }
                 }
-
-
                 for (let i = 1; i < 9; i++) {
                     if (i < aup / 100 && i < 9 - aside && document.getElementById(`b${a - i * 100 + i}`).innerText.length == 0) {
                         document.getElementById(`b${a - i * 100 + i}`).style.backgroundColor = 'green'
@@ -308,8 +305,6 @@ document.querySelectorAll('.box').forEach(item => {
                         break
                     }
                 }
-
-
                 for (let i = 1; i < 9; i++) {
                     if (i < (900 - aup) / 100 && i < aside && document.getElementById(`b${a + i * 100 - i}`).innerText.length == 0) {
                         document.getElementById(`b${a + i * 100 - i}`).style.backgroundColor = 'green'
@@ -320,8 +315,6 @@ document.querySelectorAll('.box').forEach(item => {
                     }
 
                 }
-
-
                 for (let i = 1; i < 9; i++) {
                     if (i < aup / 100 && i < aside && document.getElementById(`b${a - i * 100 - i}`).innerText.length == 0) {
                         document.getElementById(`b${a - i * 100 - i}`).style.backgroundColor = 'green'
@@ -421,7 +414,6 @@ document.querySelectorAll('.box').forEach(item => {
                         document.getElementById(`b${a + i * 100 - i}`).style.backgroundColor = 'green'
                         break
                     }
-
                 }
 
 
@@ -472,7 +464,6 @@ document.querySelectorAll('.box').forEach(item => {
                 }
 
                 item.style.backgroundColor = 'pink'
-
             }
         }
 
@@ -494,18 +485,20 @@ document.querySelectorAll('.box').forEach(item => {
 
         // Победа
 
+        // Назначем переменную королей
         numOfKings = 0
 
-
+        // Если срубают короля переменная меняется на 1
         document.querySelectorAll('.box').forEach(win => {
             if (win.innerText == 'Wking' || win.innerText == 'Bking') {
                 numOfKings += 1
             }
-
         })
-
+        // Переменная tog назначена на 91 строке и добавляется при каждом ходе, считая чей сейчас ход
+        // Если переменная равна 1, то выполняется функция
         if (numOfKings == 1) {
             setTimeout(() => {
+                //Если остаток от деления 
                 if (tog % 2 == 0) {
                     alert('White Wins !!')
                     location.reload()
@@ -516,46 +509,39 @@ document.querySelectorAll('.box').forEach(item => {
                 }
             }, 100)
         }
-
-
-
     })
-
 })
 
 
 // Передвижение элемента
 document.querySelectorAll('.box').forEach(hathiTest => {
-
+    //Если кликнуть, то выполниться функция
     hathiTest.addEventListener('click', function () {
-
+        //Если фон элемента розовый
         if (hathiTest.style.backgroundColor == 'pink') {
 
             pinkId = hathiTest.id
             pinkText = hathiTest.innerText
-
+            //Если это ячейка шахматной доски
             document.querySelectorAll('.box').forEach(hathiTest2 => {
-
+                //При нажатии на другой элемент
                 hathiTest2.addEventListener('click', function () {
+                    //Если он зелёный
                     if (hathiTest2.style.backgroundColor == 'green' && hathiTest2.innerText.length == 0) {
                         document.getElementById(pinkId).innerText = ''
                         hathiTest2.innerText = pinkText
                         coloring()
+                        //Картинка фигуры перемещается
                         insertImage()
-
                     }
-
                 })
             })
-
         }
-
     })
-
 })
 
 
-// Предотвращает выбор нескольких элементов
+// Предотвращает выбор пустых ячеек
 z = 0
 document.querySelectorAll('.box').forEach(ee => {
     ee.addEventListener('click', function () {
